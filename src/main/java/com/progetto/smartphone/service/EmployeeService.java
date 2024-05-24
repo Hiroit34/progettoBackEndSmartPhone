@@ -5,6 +5,7 @@ import com.progetto.smartphone.entity.Employee;
 import com.progetto.smartphone.errorHandling.ResourceNotFoundException;
 import com.progetto.smartphone.mapper.EmployeeMapper;
 import com.progetto.smartphone.repository.EmployeeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,10 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-
+    @Transactional
+    public Employee createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = EmployeeMapper.INSTANCE.toEntity(employeeDTO);
+        return employeeRepository.save(employee);
+    }
 
 }

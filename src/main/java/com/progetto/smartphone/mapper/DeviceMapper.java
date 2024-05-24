@@ -11,7 +11,7 @@ public interface DeviceMapper {
 
     DeviceMapper INSTANCE = Mappers.getMapper(DeviceMapper.class);
 
-    @Mapping(target = "id", ignore = true)
+//    @Mapping(target = "id", ignore = true)
     @Mapping(target = "employee", ignore = true)
     Device toEntity(DeviceDTO deviceDTO);
 }

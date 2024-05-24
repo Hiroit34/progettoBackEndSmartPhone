@@ -25,7 +25,6 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>1.4.2.Final</version> <!-- Assicurati di utilizzare la versione corretta -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

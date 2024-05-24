@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeDTO {
 
-    @NotBlank
     private Long id;
 
     @NotBlank
@@ -24,6 +23,7 @@ public class EmployeeDTO {
     @NotBlank
     private String lastName;
 
+    @NotBlank
     @Email
     private String email;
     private String profileImagePath;

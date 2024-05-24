@@ -3,8 +3,10 @@ package com.progetto.smartphone.controller;
 import com.progetto.smartphone.dto.DeviceDTO;
 import com.progetto.smartphone.entity.Device;
 import com.progetto.smartphone.errorHandling.ResourceNotFoundException;
+import com.progetto.smartphone.repository.EmployeeRepository;
 import com.progetto.smartphone.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
     @GetMapping
     public List<Device> getAllDevices() {
         return deviceService.findAll();
@@ -32,11 +37,12 @@ public class DeviceController {
     }
 
     @PostMapping
-    public Device createDevice(@Validated @RequestBody DeviceDTO deviceDTO) {
-        return deviceService.save(deviceDTO);
-    }
+    public ResponseEntity<Device> createDevice(@Validated @RequestBody DeviceDTO deviceDTO) {
+        Device device = deviceService.createDevice(deviceDTO);
+        return new ResponseEntity<>(device, HttpStatus.CREATED);
 
-    @PutMapping("/{id}")
+    }
+        @PutMapping("/{id}")
     public ResponseEntity<Device> updateDevice(@PathVariable Long id, @Validated @RequestBody DeviceDTO deviceDTO) {
         if (!deviceService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
@@ -54,4 +60,5 @@ public class DeviceController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

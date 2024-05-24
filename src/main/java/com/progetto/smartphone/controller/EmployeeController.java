@@ -6,7 +6,9 @@ import com.progetto.smartphone.errorHandling.ResourceNotFoundException;
 import com.progetto.smartphone.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,13 +29,15 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
         Optional<Employee> employee = employeeService.findById(id);
-        return employee.map(emp -> ResponseEntity.ok(emp))
+        return employee.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
     @PostMapping
-    public Employee createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
-        return employeeService.save(employeeDTO);
+    public ResponseEntity<Employee> createEmployee(@Validated @RequestBody EmployeeDTO employeeDTO) {
+        Employee employee = employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

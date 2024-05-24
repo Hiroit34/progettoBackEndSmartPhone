@@ -6,8 +6,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.mapstruct.Mapping;
 
-
-
 @Mapper
 public interface EmployeeMapper {
 
@@ -15,4 +13,6 @@ public interface EmployeeMapper {
 
     @Mapping(target = "id", ignore = true)
     Employee toEntity(EmployeeDTO employeeDTO);
+
+    EmployeeDTO toDTO(Employee employee);
 }
