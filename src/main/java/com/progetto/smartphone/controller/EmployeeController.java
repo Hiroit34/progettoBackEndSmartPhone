@@ -100,7 +100,6 @@ public class EmployeeController {
             employeeRepository.save(employee);
 
             return new ResponseEntity<>("Successfully uploaded - " + file.getOriginalFilename(), HttpStatus.OK);
-
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>("Failed to upload file", HttpStatus.INTERNAL_SERVER_ERROR);
