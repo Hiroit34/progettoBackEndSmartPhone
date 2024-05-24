@@ -1,6 +1,6 @@
 package com.progetto.smartphone.entity;
 
-public enum status {
+public enum DeviceStatus {
     AVAILABLE,
     ASSIGNED,
     UNDER_MAINTENANCE,
